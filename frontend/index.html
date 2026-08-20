@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Addis Ababa Outlook — 24-Month Climate Forecast</title>
+<title>Addis Ababa Outlook - 24-Month Climate Forecast</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -14,6 +14,10 @@
 
   <header class="masthead">
     <div class="masthead-inner">
+      <a class="brand-logo" href="https://elites-portfolio.vercel.app/" aria-label="Weather Forecast AI home">
+        <img class="header-logo" src="../frontend/image.png" alt="Elites ethiopia logo">
+        <span>WFAI</span>
+      </a>
       <div class="wordmark">
         <span class="wordmark-eyebrow">Station Readout</span>
         <h1>Addis Ababa <span class="amharic">አዲስ አበባ</span></h1>
@@ -32,7 +36,7 @@
     <section class="panel-now" id="panel-now">
       <div class="now-card" id="now-observed">
         <span class="now-label">Last Observed Month</span>
-        <span class="now-date" id="observed-date">—</span>
+        <span class="now-date" id="observed-date">-</span>
         <div class="now-grid" id="observed-grid"><!-- filled by JS --></div>
       </div>
       <div class="now-divider" aria-hidden="true">
@@ -41,9 +45,42 @@
         <span class="now-divider-line"></span>
       </div>
       <div class="now-card now-card--forecast" id="now-forecast">
-        <span class="now-label">Next Month Projected</span>
-        <span class="now-date" id="forecast-date">—</span>
+        <span class="now-label">Current Month Projected</span>
+        <span class="now-date" id="forecast-date">-</span>
         <div class="now-grid" id="forecast-grid"><!-- filled by JS --></div>
+      </div>
+      <div class="now-divider" aria-hidden="true">
+        <span class="now-divider-line"></span>
+        <span class="now-divider-label">then</span>
+        <span class="now-divider-line"></span>
+      </div>
+      <div class="now-card now-card--forecast" id="now-next-forecast">
+        <span class="now-label">Next Month Projected</span>
+        <span class="now-date" id="next-forecast-date">-</span>
+        <div class="now-grid" id="next-forecast-grid"><!-- filled by JS --></div>
+      </div>
+    </section>
+
+    <!-- SEARCH ---------------------------------------------------- -->
+    <section class="search-section" id="search-section">
+      <div class="search-head">
+        <div>
+          <h2 class="section-title">Search Weather Records</h2>
+          <p class="section-sub">Search by month, year, season, or weather value to display the matching observed and projected records.</p>
+        </div>
+        <form class="search-form" id="search-form" role="search">
+          <label class="sr-only" for="record-search">Search weather records</label>
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="m16 16 5 5"></path>
+          </svg>
+          <input id="record-search" type="search" autocomplete="off" placeholder="Try August 2026 or Kiremt...">
+          <button type="button" class="search-clear" id="search-clear" aria-label="Clear search">Clear</button>
+        </form>
+      </div>
+      <p class="search-summary" id="search-summary" aria-live="polite">Showing all records</p>
+      <div class="search-results-wrap">
+        <div id="search-results" class="search-results"></div>
       </div>
     </section>
 
@@ -53,13 +90,13 @@
       <p class="section-sub">Addis Ababa's calendar runs on three seasons, not four. Forecast months are colored by which one they fall in.</p>
       <div class="season-strip" id="season-strip"><!-- filled by JS --></div>
       <div class="season-legend">
-        <span class="legend-item"><i class="dot dot-bega"></i>Bega — dry, cool</span>
-        <span class="legend-item"><i class="dot dot-belg"></i>Belg — short rains</span>
-        <span class="legend-item"><i class="dot dot-kiremt"></i>Kiremt — main rains</span>
+        <span class="legend-item"><i class="dot dot-bega"></i>Bega - dry, cool</span>
+        <span class="legend-item"><i class="dot dot-belg"></i>Belg - short rains</span>
+        <span class="legend-item"><i class="dot dot-kiremt"></i>Kiremt - main rains</span>
       </div>
     </section>
 
-    <!-- VARIABLE SELECTOR + CHART ------------------------------------------------ -->
+    <!-- VARIABLE SELECTOR AND CHART ------------------------------------------------ -->
     <section class="chart-section">
       <div class="chart-head">
         <h2 class="section-title">Observed → Projected</h2>
@@ -101,7 +138,7 @@
         <div class="about-card">
           <span class="about-num">03</span>
           <h3>Uncertainty</h3>
-          <p>The shaded band on each chart is an 80% confidence interval — the model's honest range, not a single overconfident number.</p>
+          <p>The shaded band on each chart is an 80% confidence interval - the model's honest range, not a single overconfident number.</p>
         </div>
       </div>
     </section>
@@ -109,7 +146,20 @@
   </main>
 
   <footer class="site-footer">
-    <p>Built on 2017–2025 monthly station data · projections are a statistical estimate, not a guarantee</p>
+    <div class="footer-branding">
+      <a class="brand-logo brand-logo--footer" href="#" aria-label="Weather Forecast AI home">
+<img src="../frontend/image.png" alt="Elites ethiopia logo" class="footer-logo">
+        <span>Elites ethiopia</span>
+      </a>
+      <p class="site-footer-note">Built on 2017–2025 monthly station data · projections are a statistical estimate, not a guarantee</p>
+    </div>
+    <p class="acknowledgement">Acknowledgement: Ethiopian Meteorology Institute</p>
+    <a class="github-link" href="https://github.com/Bisratolera/weather_forcast_AI" target="_blank" rel="noreferrer" aria-label="Open Weather Forecast AI on GitHub">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 2.5a9.5 9.5 0 0 0-3 18.51c.48.09.65-.21.65-.46v-1.68c-2.65.58-3.21-1.12-3.21-1.12-.44-1.1-1.07-1.4-1.07-1.4-.87-.6.07-.59.07-.59.96.07 1.47.99 1.47.99.86 1.47 2.26 1.05 2.81.8.09-.62.34-1.05.61-1.29-2.12-.24-4.35-1.06-4.35-4.73 0-1.05.38-1.9.99-2.57-.1-.24-.43-1.22.09-2.54 0 0 .81-.26 2.64.98a9.2 9.2 0 0 1 4.8 0c1.83-1.24 2.64-.98 2.64-.98.52 1.32.19 2.3.09 2.54.62.67.99 1.52.99 2.57 0 3.68-2.24 4.49-4.37 4.73.35.3.65.87.65 1.75v2.59c0 .25.17.55.66.46A9.5 9.5 0 0 0 12 2.5Z" />
+      </svg>
+      <span>View on GitHub</span>
+    </a>
   </footer>
 
   <script src="script.js"></script>

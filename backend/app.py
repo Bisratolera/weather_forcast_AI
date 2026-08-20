@@ -74,6 +74,9 @@ def load_historical():
 def load_forecast():
     df = pd.read_csv(FORECAST_PATH, parse_dates=["date"])
     df = df.sort_values("date")
+    historical_dates = pd.read_csv(HISTORICAL_PATH, parse_dates=["date"])["date"]
+    if not historical_dates.empty:
+        df = df[df["date"] > historical_dates.max()]
     df["date"] = df["date"].dt.strftime("%Y-%m-%d")
     df["season"] = df["date"].apply(lambda d: SEASONS[int(d[5:7])])
     return _clean(df.to_dict(orient="records"))
